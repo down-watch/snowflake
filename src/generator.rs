@@ -59,8 +59,8 @@ impl Error for SnowflakeError {}
 pub struct Constants;
 
 impl Constants {
-    /// `EPOCH` `2023-04-05 06:07:08`
-    pub const EPOCH: u64 = 1680646028000; // 2023-04-05 06:07:08
+    /// `EPOCH` `2024-01-01 00:00:00`
+    pub const EPOCH: u64 = 1704067200; // 2024-01-01 00:00:00
 
     /// `DATA_CENTER_ID_BITS` data-center bits: 5
     pub const DATA_CENTER_ID_BITS: u64 = 5;
