@@ -20,6 +20,7 @@ use std::error::Error;
 use std::fmt;
 use std::fmt::{Display, Formatter};
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use chronounit::TimeUnit;
@@ -113,11 +114,12 @@ pub trait Generator {
 // ----------------------------------------------------------------
 
 /// The builtin impl of [`Generator`]
+#[derive(Clone)]
 pub struct SnowflakeGenerator {
     center_id: u64,
     worker_id: u64,
-    sequence: AtomicU64,
-    last_timestamp: AtomicU64,
+    sequence: Arc<AtomicU64>,
+    last_timestamp: Arc<AtomicU64>,
 }
 
 impl SnowflakeGenerator {
@@ -218,8 +220,8 @@ impl SnowflakeGenerator {
         Ok(SnowflakeGenerator {
             center_id,
             worker_id,
-            sequence: AtomicU64::new(0),
-            last_timestamp: AtomicU64::new(0),
+            sequence: Arc::new(AtomicU64::new(0)),
+            last_timestamp: Arc::new(AtomicU64::new(0)),
         })
     }
 }
